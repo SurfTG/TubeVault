@@ -23,7 +23,7 @@
 
 ## 📦 **Installation**
 
-### **Option 1: Run via GitHub** (Recommended)
+#### **Option 1: Run via GitHub** (Recommended)
 1. Clone the repository:
    ```bash
    git clone https://github.com/ngaihtejames/TubeVault.git
@@ -47,7 +47,7 @@
 
 ---
 
-### **Option 2: Run Locally**
+#### **Option 2: Run Locally**
 Make sure you have Python 3 installed, then run:
 
 ```bash
@@ -83,7 +83,7 @@ TubeVault/
 
 ---
 
-## 🆕 **Second Option ; Google Colab Notebook**
+# 🆕 **Second Option ; Google Colab Notebook**
 
 For those who prefer a cloud-based solution:
 
