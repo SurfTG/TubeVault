@@ -1,0 +1,30 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pkl
+*.db
+
+# Virtual environment
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Replit / local stuff
+.replit
+*.sqlite3
+.local/
+
+# macOS files
+.DS_Store
+
+# Logs
+*.log
+
+# Byte-compiled / distribution
+build/
+dist/
+*.egg-info/
