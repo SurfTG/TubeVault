@@ -95,7 +95,7 @@ For those who prefer a cloud-based solution:
 - Files save automatically to `MyDrive/YT-Downloads`  
 
 👉 Open the notebook here:  
-[Smart_YT_Downloader.ipynb](./Smart_YT_Downloader.ipynb)
+[TubeVault.ipynb](./TubeVault.ipynb)
 
 ### **How to use**:
 1. Open the notebook in **Google Colab**.  
