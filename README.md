@@ -1,17 +1,17 @@
 # **TubeVault** 🎥💾
 
-> ⚡ **Now available in two options!**  
+> ⚡ Now available in two options! 
 > - Use the **existing web app / CLI** (instructions below remain unchanged).  
 > - Or try the new **Google Colab Notebook**, which auto-detects video/playlist and lets you pick qualities just like YouTube’s menu
 
-# **First Option ; Web App** _(best recommended for users with pc or laptop)_    
+## **First Option ; Web App** _(best recommended for users with pc or laptop)_    
 
 **TubeVault is a powerful, easy-to-use YouTube video and playlist downloader built with *Python* and *yt-dlp*.**  
 **It allows you to download videos, audio, and entire playlists with just a few clicks or commands.**
 
 ---
 
-## 🚀 **Features**
+### 🚀 **Features**
 - 📥 Download individual YouTube videos or entire playlists
 - 🎶 Extract audio in MP3/other formats
 - ⚡ Fast downloads powered by [yt-dlp](https://github.com/yt-dlp/yt-dlp)
@@ -21,9 +21,9 @@
 
 ---
 
-## 📦 **Installation**
+### 📦 Installation
 
-#### **Option 1: Run via GitHub** (Recommended)
+### Option 1: Run via GitHub (Recommended)
 1. Clone the repository:
    ```bash
    git clone https://github.com/ngaihtejames/TubeVault.git
@@ -47,7 +47,7 @@
 
 ---
 
-#### **Option 2: Run Locally**
+### Option 2: Run Locally
 Make sure you have Python 3 installed, then run:
 
 ```bash
@@ -61,7 +61,7 @@ The app will start on http://127.0.0.1:5000
 
 ---
 
-## 🔧 Advanced Usage (yt-dlp Options)
+#### 🔧 Advanced Usage (yt-dlp Options)
 You can use all yt-dlp flags directly in the command line. Example:
 
 ```bash
@@ -70,7 +70,7 @@ yt-dlp -f bestaudio[ext=m4a] https://www.youtube.com/watch?v=dQw4w9WgXcQ
 
 ---
 
-## 📂 Project Structure
+#### 📂 Project Structure
 ```
 TubeVault/
 │── app.py             # Main Flask app
@@ -83,7 +83,7 @@ TubeVault/
 
 ---
 
-# 🆕 **Second Option ; Google Colab Notebook**
+## 🆕 **Second Option ; Google Colab Notebook**
 
 For those who prefer a cloud-based solution:
 
@@ -105,15 +105,15 @@ For those who prefer a cloud-based solution:
 5. Downloads will appear in `MyDrive/YT-Downloads`.
 
 ---
-## 🤝 **Contributing**
+### 🤝 **Contributing**
 Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
 
 ---
 
-## 📜 **License**
+### 📜 **License**
 This project is licensed under the MIT License – see the LICENSE file for details.
 
 ---
 
-## 👤 Author
+### 👤 Author
 - **James Ngaihte** ([@ngaihtejames](https://github.com/ngaihtejames))
