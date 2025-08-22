@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Video Downloader - yt-dlp Web Interface{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h1 class="display-6">
+                <i class="fas fa-video me-2 text-primary"></i>
+                Video Downloader
+            </h1>
+            <p class="lead text-muted">
+                Download videos from YouTube, Vimeo, and hundreds of other sites using yt-dlp
+            </p>
+        </div>
+        
+        <!-- Video URL Input -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-link me-2"></i>
+                    Enter Video URL
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="downloadForm">
+                    <div class="mb-3">
+                        <label for="videoUrl" class="form-label">Video URL</label>
+                        <input type="url" class="form-control" id="videoUrl" 
+                               placeholder="https://www.youtube.com/watch?v=..." required>
+                        <div class="form-text">
+                            Supports YouTube, Vimeo, TikTok, and many other platforms
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Options (Collapsible) -->
+                    <div class="mb-3">
+                        <button class="btn btn-outline-secondary btn-sm" type="button" 
+                                data-bs-toggle="collapse" data-bs-target="#advancedOptions">
+                            <i class="fas fa-cog me-1"></i>
+                            Advanced Options
+                        </button>
+                    </div>
+                    
+                    <div class="collapse" id="advancedOptions">
+                        <div class="card card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="quality" class="form-label">Quality</label>
+                                    <select class="form-select" id="quality">
+                                        <option value="best[height<=720]/best">720p (Default)</option>
+                                        <option value="best[height<=480]/best">480p</option>
+                                        <option value="best[height<=1080]/best">1080p</option>
+                                        <option value="best">Best Available</option>
+                                        <option value="worst">Worst (Smallest)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="format" class="form-label">Format</label>
+                                    <select class="form-select" id="format">
+                                        <option value="">Auto</option>
+                                        <option value="mp4">MP4</option>
+                                        <option value="webm">WebM</option>
+                                        <option value="mkv">MKV</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-check mt-3">
+                                <input class="form-check-input" type="checkbox" id="audioOnly">
+                                <label class="form-check-label" for="audioOnly">
+                                    Audio Only (Extract MP3)
+                                </label>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="downloadPlaylist">
+                                <label class="form-check-label" for="downloadPlaylist">
+                                    Download entire playlist (if URL is a playlist)
+                                </label>
+                            </div>
+                            
+                            <!-- Cookies Section -->
+                            <div class="mt-3">
+                                <label class="form-label">Cookies (for age-restricted or private content)</label>
+                                <div class="mb-2">
+                                    <button class="btn btn-outline-secondary btn-sm" type="button" 
+                                            data-bs-toggle="collapse" data-bs-target="#cookieOptions">
+                                        <i class="fas fa-cookie-bite me-1"></i>
+                                        Cookie Options
+                                    </button>
+                                </div>
+                                
+                                <div class="collapse" id="cookieOptions">
+                                    <div class="card card-body">
+                                        <div class="mb-3">
+                                            <label for="cookieFile" class="form-label">Upload Cookie File</label>
+                                            <input type="file" class="form-control" id="cookieFile" accept=".txt">
+                                            <div class="form-text">Upload a cookies.txt file exported from your browser</div>
+                                        </div>
+                                        
+                                        <div class="mb-2">
+                                            <span class="text-muted">— OR —</span>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="cookieText" class="form-label">Paste Cookie Text</label>
+                                            <textarea class="form-control" id="cookieText" rows="4" 
+                                                    placeholder="Paste cookies.txt content here..."></textarea>
+                                            <div class="form-text">Paste the content of your cookies.txt file directly</div>
+                                        </div>
+                                        
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            <small>
+                                                <strong>How to get cookies:</strong> Use browser extensions like "Get cookies.txt LOCALLY" 
+                                                or export cookies from your browser's developer tools. This allows downloading 
+                                                age-restricted, private, or region-locked content you have access to.
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button type="button" class="btn btn-outline-info me-md-2" id="getInfoBtn">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Get Info
+                        </button>
+                        <button type="submit" class="btn btn-primary" id="downloadBtn">
+                            <i class="fas fa-download me-1"></i>
+                            Download Video
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Video Information Display -->
+        <div class="card mb-4" id="videoInfoCard" style="display: none;">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Video Information
+                </h5>
+            </div>
+            <div class="card-body" id="videoInfoContent">
+                <!-- Video info will be populated here -->
+            </div>
+        </div>
+        
+        <!-- Download Progress -->
+        <div class="card mb-4" id="progressCard" style="display: none;">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-clock me-2"></i>
+                    Download Progress
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="progress mb-3" style="height: 20px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                         id="progressBar" role="progressbar" style="width: 0%"></div>
+                </div>
+                <div id="progressInfo" class="small text-muted">
+                    Preparing download...
+                </div>
+                <div id="progressDetails" class="mt-2">
+                    <!-- Progress details will be populated here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Error Display -->
+        <div class="alert alert-danger" id="errorAlert" style="display: none;">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <span id="errorMessage"></span>
+        </div>
+        
+        <!-- Success Display -->
+        <div class="alert alert-success" id="successAlert" style="display: none;">
+            <i class="fas fa-check-circle me-2"></i>
+            <span id="successMessage"></span>
+            <div class="mt-2">
+                <button class="btn btn-sm btn-outline-success" id="downloadFileBtn">
+                    <i class="fas fa-download me-1"></i>
+                    Download File
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Downloaded Files Section -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-folder me-2"></i>
+                    Downloaded Files
+                </h5>
+                <div>
+                    <button class="btn btn-outline-primary btn-sm me-2" id="refreshFilesBtn">
+                        <i class="fas fa-sync-alt me-1"></i>
+                        Refresh
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" id="cleanupBtn">
+                        <i class="fas fa-trash me-1"></i>
+                        Clean Up All
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="filesLoading" class="text-center py-3">
+                    <div class="spinner-border spinner-border-sm me-2"></div>
+                    Loading files...
+                </div>
+                <div id="filesContainer">
+                    <!-- Files will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Load files on page load
+    loadDownloadedFiles();
+});
+</script>
+{% endblock %}
