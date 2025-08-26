@@ -435,15 +435,20 @@ class VideoDownloader {
                                 <div class="file-date">Modified: ${file.modified}</div>
                             </div>
                             <div class="btn-group">
+                                <a href="https://play.tg-drive.eu.org/?m=https://tubevault.onrender.com/download_file/${encodeURIComponent(file.filename)}&t=${file.filename)}" 
+                                   class="btn btn-primary btn-sm">
+                                    <i class="fas fa-download me-1"></i>
+                                    Descargar
+                                </a>
                                 <a href="/download_file/${encodeURIComponent(file.filename)}" 
                                    class="btn btn-primary btn-sm">
                                     <i class="fas fa-download me-1"></i>
-                                    Download
+                                    Ver
                                 </a>
                                 <button class="btn btn-outline-danger btn-sm" 
                                         onclick="app.deleteFile('${this.escapeHtml(file.filename)}')">
                                     <i class="fas fa-trash me-1"></i>
-                                    Delete
+                                    Eliminar
                                 </button>
                             </div>
                         </div>
