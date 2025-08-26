@@ -435,7 +435,7 @@ class VideoDownloader {
                                 <div class="file-date">Modified: ${file.modified}</div>
                             </div>
                             <div class="btn-group">
-                                <a href="https://play.tg-drive.eu.org/?m=https://tubevault.onrender.com/download_file/${encodeURIComponent(file.filename)}&t=${file.filename)}" 
+                                <a href="https://play.tg-drive.eu.org/?m=https://tubevault.onrender.com/download_file/${encodeURIComponent(file.filename)}" 
                                    class="btn btn-primary btn-sm">
                                     <i class="fas fa-download me-1"></i>
                                     Descargar
